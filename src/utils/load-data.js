@@ -9,7 +9,11 @@ export function getPartyNames() {
 export function getVotesDistribution() {
   const firstPoll = Object.keys(pollsData)[0];
   const pollResults = pollsData[firstPoll];
-  return pollResults;
+
+  return pollResults.reduce((resultsObject, { party, mandates }) => ({
+    ...resultsObject,
+    [party]: parseFloat(mandates, 10),
+  }), {});
 }
 
 export default {
