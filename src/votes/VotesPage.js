@@ -4,45 +4,39 @@ import VoteSpread from './VoteSpread';
 import DemographicParams from './DemographicParams';
 import {
   getPartyNames,
-  getVotesDistribution,
-  getVotersPerMandate,
-} from '../utils/load-data';
-
-// TODO: Base this on demographic data.
-const userVotes = 200000;
+  getMandatesDistributionByPolls,
+  getDistributionConsideringUserVote,
+  getWingSizes,
+} from '../services/political-data';
 
 export default class VotesPage extends Component {
   state = {
-    votes: null,
+    mandates: null,
+    wingSizes: null,
   };
   partyNames = getPartyNames();
-  votesBasedOnPoll = getVotesDistribution();
+  mandatesBasedOnPolls = getMandatesDistributionByPolls();
 
   componentDidMount() {
-    this.setState({ votes: this.votesBasedOnPoll })
+    this.setState({
+      mandates: this.mandatesBasedOnPolls,
+      wingSizes: getWingSizes(this.mandatesBasedOnPolls),
+    })
   }
 
   changeUserVote = (selectedParty) => {
-    const mandatesControlledByUser = userVotes / getVotersPerMandate();
-
-    const numberOfParties = this.partyNames.length;
-    const mandatesTakenByUserFromEachParty = mandatesControlledByUser / numberOfParties;
-
-    const updatedVotes = Object.keys(this.votesBasedOnPoll).reduce((updated, partyName) => ({
-      ...updated,
-      [partyName]: partyName === selectedParty ?
-        (this.votesBasedOnPoll[partyName] + mandatesControlledByUser) :
-        (this.votesBasedOnPoll[partyName] - mandatesTakenByUserFromEachParty)
-    }), {});
-
-    this.setState({ votes: updatedVotes });
+    const newMandateDistribution = getDistributionConsideringUserVote(selectedParty);
+    this.setState({
+      mandates: newMandateDistribution,
+      wingSizes: getWingSizes(newMandateDistribution),
+    });
   };
 
   render() {
     return (
       <div>
         <VoteSelector parties={this.partyNames} onPartySelected={this.changeUserVote} />
-        <VoteSpread votes={this.state.votes} />
+        <VoteSpread mandates={this.state.mandates} wingSizes={this.state.wingSizes} />
         <DemographicParams />
       </div>
     );
