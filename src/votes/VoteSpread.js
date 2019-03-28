@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs';
+import { getVotesDistribution } from '../utils/load-data';
 
-// TODO: Import from /data.
-const parties = [
-  { name: 'כחול לבן' },
-  { name: 'ליכוד' },
-  { name: 'עבודה' },
-];
+// TODO: This will need to be moved to state, so the user's actions can affect it.
+const votes = getVotesDistribution();
 
 export default class VoteSpread extends Component {
   render() {
     const data = {
-      labels: parties.map(({ name }) => name),
+      labels: votes.map(({ party }) => party),
       datasets: [{
         label: 'מספר קולות',
-        data: [30, 30, 8],
+        data: votes.map(({ mandates }) => mandates),
       }],
     };
 
     return (
-      <div className="m-4">
+      <div className="m-4 h-50">
         <h4>
         התפלגות הקולות
         </h4>
-        <Bar data={data} />
+        <Bar data={data} options={{ responsive: true }} />
       </div>
     );
   }

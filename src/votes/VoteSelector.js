@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { getPartyNames } from '../utils/load-data';
 
-// TODO: Import from /data.
-const parties = [
-  { name: 'כחול לבן' },
-  { name: 'ליכוד' },
-  { name: 'עבודה' },
-];
+const partyNames = getPartyNames();
 
 export default class VoteSelector extends Component {
   render() {
@@ -17,7 +13,7 @@ export default class VoteSelector extends Component {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {parties.map(({ name }) => (
+          {partyNames.map((name) => (
             <Dropdown.Item>{name}</Dropdown.Item>
           ))}
         </Dropdown.Menu>
