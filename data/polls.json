@@ -1,0 +1,60 @@
+{
+	"maariv_average_poll": [
+		{
+			"party": "איחוד מפלגות הימין"
+			"mandates": "6.36"
+		},
+		{
+			"party": "הימין החדש"
+			"mandates": "5.73"
+		},
+		{
+			"party": "ישראל ביתנו"
+			"mandates": "2.32"
+		},
+		{
+			"party": "הליכוד"
+			"mandates": "28.64"
+		},
+		{
+			"party": "כולנו"
+			"mandates": "3.86"
+		},
+		{
+			"party": "שס"
+			"mandates": "5.23"
+		},
+		{
+			"party": "יהדות התורה"
+			"mandates": "6.82"
+		},
+		{
+			"party": "זהות"
+			"mandates": "3.45"
+		},
+		{
+			"party": "גשר"
+			"mandates": "0.55"
+		},
+		{
+			"party": "כחול לבן"
+			"mandates": "32.14"
+		},
+		{
+			"party": "העבודה"
+			"mandates": "8.55"
+		},
+		{
+			"party": "מרצ"
+			"mandates": "5.41"
+		},
+		{
+			"party": "חדש-תעל"
+			"mandates": "7.64"
+		},
+		{
+			"party": "רעמ-בלד"
+			"mandates": "3.32"
+		}
+	]
+}
