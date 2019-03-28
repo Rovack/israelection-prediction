@@ -9,6 +9,7 @@ const numberOfEligibleCitizens = 6339279;
 const votingPercentage = 72.34;
 
 // TODO: Base this on demographic data.
+// TODO: Consider making this service stateful so params don't have to be passed through components.
 const userVotes = 100000;
 
 function getVotersPerMandate() {

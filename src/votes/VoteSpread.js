@@ -3,7 +3,7 @@ import { Bar, Pie } from 'react-chartjs';
 
 export default class VoteSpread extends Component {
   render() {
-    const { mandates, wingSizes } = this.props;
+    const { mandates, wingSizes, selectedParty } = this.props;
 
     if (!mandates) {
       // TODO: Show loading indicator.
@@ -29,16 +29,23 @@ export default class VoteSpread extends Component {
 
     return (
       <div className="m-4">
-        <div>
-          <h4>
-          התפלגות המנדטים
+        {selectedParty && (
+          <h4 className="my-3">
+            אם אנשים כמוני היו מצביעים למפלגת
+            <span className="font-weight-bold mx-2">{selectedParty}</span>
+            אז הכנסת הייתה נראית כך:
           </h4>
+        )}
+        <div>
+          <h5>
+          התפלגות המנדטים
+          </h5>
           <Bar data={mandatesData} options={{ responsive: true }} />
         </div>
         <div>
-          <h4>
+          <h5>
           חלוקה לגושים
-          </h4>
+          </h5>
           <Pie data={wingsData} options={{ responsive: true }} />
         </div>
       </div>

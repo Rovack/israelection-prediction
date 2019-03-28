@@ -25,25 +25,17 @@ export default class VoteSelector extends Component {
 
   render() {
     return (
-      <div className="p-4">
-        <Dropdown>
-          <Dropdown.Toggle size="large">
-            בחירת מפלגה
-          </Dropdown.Toggle>
+      <Dropdown className="p-3">
+        <Dropdown.Toggle size="large">
+          בחירת מפלגה
+        </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            {this.props.parties.map((name) => (
-              <PartyItem key={name} name={name} onSelect={this.onPartySelected} />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        {this.state.selectedParty && (
-          <div className="mt-2">
-            <span>אתה מצביע ל:</span>
-            <span className="font-weight-bold mx-1">{this.state.selectedParty}</span>
-          </div>
-        )}
-      </div>
+        <Dropdown.Menu>
+          {this.props.parties.map((name) => (
+            <PartyItem key={name} name={name} onSelect={this.onPartySelected} />
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }

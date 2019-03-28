@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import VoteSelector from './VoteSelector';
 import VoteSpread from './VoteSpread';
-import DemographicParams from './DemographicParams';
 import {
   getPartyNames,
   getMandatesDistributionByPolls,
@@ -11,6 +10,7 @@ import {
 
 export default class VotesPage extends Component {
   state = {
+    selectedParty: null,
     mandates: null,
     wingSizes: null,
   };
@@ -27,17 +27,22 @@ export default class VotesPage extends Component {
   changeUserVote = (selectedParty) => {
     const newMandateDistribution = getDistributionConsideringUserVote(selectedParty);
     this.setState({
+      selectedParty,
       mandates: newMandateDistribution,
       wingSizes: getWingSizes(newMandateDistribution),
     });
   };
 
   render() {
+    console.log(this.props.demographicParams);
     return (
       <div>
         <VoteSelector parties={this.partyNames} onPartySelected={this.changeUserVote} />
-        <VoteSpread mandates={this.state.mandates} wingSizes={this.state.wingSizes} />
-        <DemographicParams />
+        <VoteSpread
+          selectedParty={this.state.selectedParty}
+          mandates={this.state.mandates}
+          wingSizes={this.state.wingSizes}
+        />
       </div>
     );
   }

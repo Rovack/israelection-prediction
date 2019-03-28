@@ -4,7 +4,6 @@ export default class Question extends Component {
   render() {
     return (
       <div>
-        שאךה?
       </div>
     );
   }
