@@ -1,0 +1,58 @@
+{
+	"גיל": [
+		{
+			"category": "18-34",
+			"percent": "0.326"
+		},
+		{
+			"category": "35-54",
+			"percent": "0.364"
+		},
+		{
+			"category": "55+",
+			"percent": "0.31"
+		}
+	],
+	"מין": [
+		{
+			"category": "אישה",
+			"percent": "0.505"
+		},
+		{
+			"category": "גבר",
+			"percent": "0.495"
+		}
+	],
+	"מאיפה בארץ?": [
+		{
+			"category": "צפוני",
+			"percent": "0.28"
+		},
+		{
+			"category": "מהמרכז",
+			"percent": "0.4"
+		},
+		{
+			"category": "ירושלים והסביבה",
+			"percent": "0.18"
+		},
+		{
+			"category": "דרומי",
+			"percent": "0.14"
+		}
+	],
+	"כלב או חתול": [
+		{
+			"category": "כלב",
+			"percent": "0.37"
+		},
+		{
+			"category": "חתול",
+			"percent": "0.33"
+		},
+		{
+			"category": "לא ולא",
+			"percent": "0.3"
+		}
+	]
+}
