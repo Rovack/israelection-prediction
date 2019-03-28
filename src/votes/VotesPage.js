@@ -5,11 +5,11 @@ import DemographicParams from './DemographicParams';
 import {
   getPartyNames,
   getVotesDistribution,
+  getVotersPerMandate,
 } from '../utils/load-data';
 
 // TODO: Base this on demographic data.
-// TODO: Make this votes, and calculate mandates accordingly.
-const userMandates = 10;
+const userVotes = 200000;
 
 export default class VotesPage extends Component {
   state = {
@@ -23,10 +23,17 @@ export default class VotesPage extends Component {
   }
 
   changeUserVote = (selectedParty) => {
-    const updatedVotes = {
-      ...this.votesBasedOnPoll,
-      [selectedParty]: this.votesBasedOnPoll[selectedParty] + userMandates,
-    };
+    const mandatesControlledByUser = userVotes / getVotersPerMandate();
+
+    const numberOfParties = this.partyNames.length;
+    const mandatesTakenByUserFromEachParty = mandatesControlledByUser / numberOfParties;
+
+    const updatedVotes = Object.keys(this.votesBasedOnPoll).reduce((updated, partyName) => ({
+      ...updated,
+      [partyName]: partyName === selectedParty ?
+        (this.votesBasedOnPoll[partyName] + mandatesControlledByUser) :
+        (this.votesBasedOnPoll[partyName] - mandatesTakenByUserFromEachParty)
+    }), {});
 
     this.setState({ votes: updatedVotes });
   };
