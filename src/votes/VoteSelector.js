@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+
+// TODO: Import from /data.
+const parties = [
+  { name: 'כחול לבן' },
+  { name: 'ליכוד' },
+  { name: 'עבודה' },
+];
 
 export default class VoteSelector extends Component {
   render() {
     return (
-      <div>
-        בחירת מפלגה
-      </div>
+      <Dropdown className="p-4">
+        <Dropdown.Toggle size="large">
+          בחירת מפלגה
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {parties.map(({ name }) => (
+            <Dropdown.Item>{name}</Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }
