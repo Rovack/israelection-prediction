@@ -1,0 +1,60 @@
+{
+	"basic_wings": [
+		{
+			"party": "איחוד מפלגות הימין",
+			"wing": "right"
+		},
+		{
+			"party": "הימין החדש",
+			"wing": "right"
+		},
+		{
+			"party": "ישראל ביתנו",
+			"wing": "right"
+		},
+		{
+			"party": "הליכוד",
+			"wing": "right"
+		},
+		{
+			"party": "כולנו",
+			"wing": "right"
+		},
+		{
+			"party": "שס",
+			"wing": "right"
+		},
+		{
+			"party": "יהדות התורה",
+			"wing": "right"
+		},
+		{
+			"party": "זהות",
+			"wing": "both"
+		},
+		{
+			"party": "גשר",
+			"wing": "both"
+		},
+		{
+			"party": "כחול לבן",
+			"wing": "left"
+		},
+		{
+			"party": "העבודה",
+			"wing": "left"
+		},
+		{
+			"party": "מרצ",
+			"wing": "left"
+		},
+		{
+			"party": "חדש-תעל",
+			"wing": "left"
+		},
+		{
+			"party": "רעמ-בלד",
+			"wing": "left"
+		}
+	]
+}
