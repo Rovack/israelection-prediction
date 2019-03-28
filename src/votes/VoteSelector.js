@@ -4,7 +4,7 @@ export default class VoteSelector extends Component {
   render() {
     return (
       <div>
-        Vote selector placeholder
+        בחירת מפלגה
       </div>
     );
   }

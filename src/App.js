@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import VotesPage from './votes/VotesPage';
+import VotesPage from './votes';
 
 class App extends Component {
   render() {

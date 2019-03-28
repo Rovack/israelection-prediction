@@ -4,7 +4,7 @@ export default class DemographicParams extends Component {
   render() {
     return (
       <div>
-        Demographic params placeholder
+        אתה מצביע בשם:
       </div>
     );
   }

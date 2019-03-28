@@ -4,7 +4,7 @@ export default class VoteSpread extends Component {
   render() {
     return (
       <div>
-        Vote spread placeholder
+        התפלגות הקולות
       </div>
     );
   }
