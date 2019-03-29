@@ -44,17 +44,17 @@ export default class VoteSpread extends Component {
             </h4>
           </OverlayTrigger>
         )}
-        <div>
+        <div className="mb-3">
           <h5>
           התפלגות המנדטים
           </h5>
-          <Bar data={mandatesData} options={{ responsive: true }} />
+          <Bar data={mandatesData} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
         <div>
           <h5>
           חלוקה לגושים
           </h5>
-          <Pie data={wingsData} options={{ responsive: true }} />
+          <Pie data={wingsData} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
       </div>
     );
