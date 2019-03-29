@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 import Question from './Question';
 import { getQuestions } from '../services/demographic-data';
 
 export default class DemographicQuestions extends Component {
   state = {
-    remainingQuestions: null,
+    questions: null,
+    questionNumber: null,
     answers: null,
   };
 
@@ -16,37 +18,50 @@ export default class DemographicQuestions extends Component {
       return;
     }
 
-    this.setState({ answers: {}, remainingQuestions: questions });
+    this.setState({
+      questions,
+      questionNumber: 0,
+      answers: {},
+    });
   }
 
   registerUserAnswer = (answer) => {
-    const [currentQuestion, ...nextQuestions] = this.state.remainingQuestions;
+    const { questions, questionNumber, answers } = this.state;
+    const currentQuestion = questions[questionNumber];
 
     this.setState({
-      answers: { ...this.state.answers, [currentQuestion.question]: answer },
-      remainingQuestions: nextQuestions,
+      questionNumber: questionNumber + 1,
+      answers: { ...answers, [currentQuestion.question]: answer },
     }, () => {
-      if (this.state.remainingQuestions.length === 0) {
+      if (this.state.questionNumber === questions.length) {
         this.props.onAnswered(this.state.answers);
       }
     });
   };
 
   render() {
-    const currentQuestion = this.state.remainingQuestions && this.state.remainingQuestions[0];
+    const { questions, questionNumber } = this.state;
 
-    if (!currentQuestion) {
+    if (!questions) {
       return null;
     }
 
     return (
-      <div className="mt-4 p-3 justify-content-center align-items-center">
-        <Question
-          question={currentQuestion.question}
-          possibleAnswers={currentQuestion.possibleAnswers}
-          onAnswered={this.registerUserAnswer}
-        />
-      </div>
+      <Carousel
+        activeIndex={questionNumber}
+        indicators={false}
+        className="mt-4 p-3 justify-content-center align-items-center"
+      >
+        {questions.map(({ question, possibleAnswers }) => (
+          <Carousel.Item>
+            <Question
+              question={question}
+              possibleAnswers={possibleAnswers}
+              onAnswered={this.registerUserAnswer}
+            />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     );
   }
 }
