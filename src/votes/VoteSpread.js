@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Bar, Pie } from 'react-chartjs';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 export default class VoteSpread extends Component {
   render() {
@@ -30,11 +32,17 @@ export default class VoteSpread extends Component {
     return (
       <div className="m-4">
         {selectedParty && (
-          <h4 className="my-3">
-            אם אנשים כמוני היו מצביעים למפלגת
-            <span className="font-weight-bold mx-2">{selectedParty}</span>
-            אז הכנסת הייתה נראית כך:
-          </h4>
+          <OverlayTrigger overlay={
+            <Tooltip>
+              לפי התשובות שלך, יש {this.props.peopleInDemographicGroup} אנשים שעשויים להצביע כמוך
+            </Tooltip>
+          }>
+            <h4 className="my-3">
+              אם אנשים כמוני היו מצביעים למפלגת
+              <span className="font-weight-bold mx-2">{selectedParty}</span>
+              אז הכנסת הייתה נראית כך:
+            </h4>
+          </OverlayTrigger>
         )}
         <div>
           <h5>

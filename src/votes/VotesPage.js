@@ -7,25 +7,23 @@ import {
   getDistributionConsideringUserVote,
   getWingSizes,
 } from '../services/political-data';
+import { getPeopleInDemographicGroup } from '../services/demographic-data';
 
 export default class VotesPage extends Component {
   state = {
     selectedParty: null,
-    mandates: null,
-    wingSizes: null,
+    mandates: getMandatesDistributionByPolls(),
+    wingSizes: getWingSizes(getMandatesDistributionByPolls()),
+    partyNames: getPartyNames(),
+    peopleInDemographicGroup: getPeopleInDemographicGroup(this.props.demographicParams),
   };
-  partyNames = getPartyNames();
-  mandatesBasedOnPolls = getMandatesDistributionByPolls();
-
-  componentDidMount() {
-    this.setState({
-      mandates: this.mandatesBasedOnPolls,
-      wingSizes: getWingSizes(this.mandatesBasedOnPolls),
-    })
-  }
 
   changeUserVote = (selectedParty) => {
-    const newMandateDistribution = getDistributionConsideringUserVote(selectedParty);
+    const newMandateDistribution = getDistributionConsideringUserVote(
+      selectedParty,
+      this.props.demographicParams,
+    );
+
     this.setState({
       selectedParty,
       mandates: newMandateDistribution,
@@ -34,14 +32,14 @@ export default class VotesPage extends Component {
   };
 
   render() {
-    console.log(this.props.demographicParams);
     return (
       <div>
-        <VoteSelector parties={this.partyNames} onPartySelected={this.changeUserVote} />
+        <VoteSelector parties={this.state.partyNames} onPartySelected={this.changeUserVote} />
         <VoteSpread
           selectedParty={this.state.selectedParty}
           mandates={this.state.mandates}
           wingSizes={this.state.wingSizes}
+          peopleInDemographicGroup={this.state.peopleInDemographicGroup}
         />
       </div>
     );

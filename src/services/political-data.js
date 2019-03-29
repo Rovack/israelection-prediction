@@ -1,20 +1,14 @@
 import pollsData from '../data/polls.json';
 import wingsData from '../data/wings.json';
+import {
+  getPeopleInDemographicGroup,
+  getTotalVoters,
+} from './demographic-data';
 
 const totalMandates = 120;
 
-// https://www.ynet.co.il/articles/0,7340,L-5469122,00.html
-const numberOfEligibleCitizens = 6339279;
-// Based on the percentage in 2015 - http://votes20.gov.il.
-const votingPercentage = 72.34;
-
-// TODO: Base this on demographic data.
-// TODO: Consider making this service stateful so params don't have to be passed through components.
-const userVotes = 100000;
-
 function getVotersPerMandate() {
-  // TODO: Factor in the number of people whose votes are lost on parties that don't pass the min %.
-  const numberOfVoters = (numberOfEligibleCitizens * votingPercentage) / 100;
+  const numberOfVoters = getTotalVoters();
   return numberOfVoters / totalMandates;
 }
 
@@ -34,7 +28,9 @@ export function getMandatesDistributionByPolls() {
   }), {});
 }
 
-export function getDistributionConsideringUserVote(userVoteParty) {
+export function getDistributionConsideringUserVote(userVoteParty, demographicParams) {
+  const userVotes = getPeopleInDemographicGroup(demographicParams);
+
   const baseDistribution = getMandatesDistributionByPolls();
   const mandatesControlledByUser = userVotes / getVotersPerMandate();
 
