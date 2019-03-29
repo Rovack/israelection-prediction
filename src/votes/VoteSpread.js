@@ -14,7 +14,7 @@ export default class VoteSpread extends Component {
 
     // Shouldn't rely on Object.keys and Object.values having consistent order.
     const parties = Object.keys(mandates);
-    const mandatesInSameOrder = parties.map(party => mandates[party]);
+    const mandatesInSameOrder = parties.map(party => Math.round(mandates[party]));
 
     const mandatesData = {
       labels: parties,
@@ -25,8 +25,8 @@ export default class VoteSpread extends Component {
     };
 
     const wingsData = [
-      { value: wingSizes.right, label: 'ימין' },
-      { value: wingSizes.left, label: 'שמאל' },
+      { value: Math.round(wingSizes.right), label: 'ימין' },
+      { value: Math.round(wingSizes.left), label: 'שמאל' },
     ];
 
     return (
