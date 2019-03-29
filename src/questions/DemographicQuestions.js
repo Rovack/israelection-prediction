@@ -29,6 +29,11 @@ export default class DemographicQuestions extends Component {
     const { questions, questionNumber, answers } = this.state;
     const currentQuestion = questions[questionNumber];
 
+    if (!currentQuestion.possibleAnswers.includes(answer)) {
+      // Happens sometimes on quick consecutive clicks. Just ignore.
+      return;
+    }
+
     this.setState({
       questionNumber: questionNumber + 1,
       answers: { ...answers, [currentQuestion.question]: answer },
@@ -49,11 +54,13 @@ export default class DemographicQuestions extends Component {
     return (
       <Carousel
         activeIndex={questionNumber}
+        onSelect={() => {}}
         indicators={false}
+        controls={false}
         className="mt-4 p-3 justify-content-center align-items-center"
       >
         {questions.map(({ question, possibleAnswers }) => (
-          <Carousel.Item>
+          <Carousel.Item key={question}>
             <Question
               question={question}
               possibleAnswers={possibleAnswers}
