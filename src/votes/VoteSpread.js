@@ -37,12 +37,13 @@ export default class VoteSpread extends Component {
       return null;
     }
 
+    const partyNamesRightToLeft = Object.keys(mandates).reverse();
+    const formattedPartyNames = partyNamesRightToLeft.map(formatPartyName);
     // Shouldn't rely on Object.keys and Object.values having consistent order.
-    const parties = Object.keys(mandates).map(formatPartyName);
-    const mandatesInSameOrder = Object.keys(mandates).map(party => Math.round(mandates[party]));
+    const mandatesInSameOrder = partyNamesRightToLeft.map(party => Math.round(mandates[party]));
 
     const mandatesData = {
-      labels: parties,
+      labels: formattedPartyNames,
       datasets: [{
         label: 'מנדטים',
         data: mandatesInSameOrder,
