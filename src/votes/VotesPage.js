@@ -34,7 +34,11 @@ export default class VotesPage extends Component {
   render() {
     return (
       <div>
-        <PartySelector parties={this.state.partyNames} onPartySelected={this.changeUserVote} />
+        <PartySelector
+          parties={this.state.partyNames}
+          selectedParty={this.state.selectedParty}
+          onPartySelected={this.changeUserVote}
+        />
         <VoteSpread
           selectedParty={this.state.selectedParty}
           mandates={this.state.mandates}

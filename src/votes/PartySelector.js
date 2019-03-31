@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 
 class PartyItem extends Component {
-  onSelect = () => this.props.onSelect(this.props.name);
+  partyClicked = () => this.props.onSelect(this.props.name);
 
   render() {
     return (
-      <Dropdown.Item onSelect={this.onSelect}>
+      <Button
+        active={this.props.active}
+        size="sm"
+        className="m-1"
+        onClick={this.partyClicked}
+      >
         {this.props.name}
-      </Dropdown.Item>
+      </Button>
     );
   }
 }
@@ -24,18 +29,21 @@ export default class PartySelector extends Component {
   };
 
   render() {
+    console.log(this.props.selectedParty, this.props.parties);
     return (
-      <Dropdown className="p-3">
-        <Dropdown.Toggle size="large">
-          בחירת מפלגה
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          {this.props.parties.map((name) => (
-            <PartyItem key={name} name={name} onSelect={this.onPartySelected} />
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
+      <div className="p-3">
+        <span className="ml-1">
+          הבחירה שלי:
+        </span>
+        {this.props.parties.map((name) => (
+          <PartyItem
+            key={name}
+            name={name}
+            active={name === this.props.selectedParty}
+            onSelect={this.onPartySelected}
+          />
+        ))}
+      </div>
     );
   }
 }
