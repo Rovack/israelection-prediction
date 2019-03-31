@@ -76,7 +76,7 @@ export default class Results extends Component {
         <h3>
           מדהים!
           <br />
-          הקול שלך שווה {getPeopleInDemographicGroup(answers)} קולות!
+          הקול שלך שווה {getPeopleInDemographicGroup(answers).toLocaleString()} קולות!
         </h3>
         {this.renderFooter()}
       </div>
