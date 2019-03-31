@@ -15,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && aws s3 cp --recursive ./build s3://aws-website-israelquiz-qmt5x/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers && aws cloudfront create-invalidation --distribution-id E27ZAZT25YFVM7 --paths '/*'"
   },
   "eslintConfig": {
     "extends": "react-app"
