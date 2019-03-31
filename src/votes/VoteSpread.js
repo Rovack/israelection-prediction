@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Bar, Pie } from 'react-chartjs';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 export default class VoteSpread extends Component {
   render() {
-    const { mandates, wingSizes, selectedParty } = this.props;
+    const { mandates, wingSizes } = this.props;
 
     if (!mandates) {
       // TODO: Show loading indicator.
@@ -31,19 +29,6 @@ export default class VoteSpread extends Component {
 
     return (
       <div className="m-4">
-        {selectedParty && (
-          <OverlayTrigger overlay={
-            <Tooltip>
-              לפי התשובות שלך, יש {this.props.peopleInDemographicGroup} אנשים שעשויים להצביע כמוך
-            </Tooltip>
-          }>
-            <h4 className="my-3">
-              אם אנשים כמוני היו מצביעים למפלגת
-              <span className="font-weight-bold mx-2">{selectedParty}</span>
-              אז הכנסת הייתה נראית כך:
-            </h4>
-          </OverlayTrigger>
-        )}
         <div className="mb-3">
           <h5>
           התפלגות המנדטים

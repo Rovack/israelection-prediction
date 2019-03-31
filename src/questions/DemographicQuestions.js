@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Question from './Question';
+import Results from './Results';
 import { getQuestions } from '../services/demographic-data';
 
 export default class DemographicQuestions extends Component {
@@ -37,11 +38,11 @@ export default class DemographicQuestions extends Component {
     this.setState({
       questionNumber: questionNumber + 1,
       answers: { ...answers, [currentQuestion.question]: answer },
-    }, () => {
-      if (this.state.questionNumber === questions.length) {
-        this.props.onAnswered(this.state.answers);
-      }
     });
+  };
+
+  submitAnswers = () => {
+    this.props.onAnswered(this.state.answers);
   };
 
   render() {
@@ -49,6 +50,10 @@ export default class DemographicQuestions extends Component {
 
     if (!questions) {
       return null;
+    }
+
+    if (this.state.questionNumber >= questions.length) {
+      return <Results answers={this.state.answers} onSubmit={this.submitAnswers} />;
     }
 
     return (
