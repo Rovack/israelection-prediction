@@ -29,7 +29,6 @@ export default class PartySelector extends Component {
   };
 
   render() {
-    console.log(this.props.selectedParty, this.props.parties);
     return (
       <div className="p-3">
         <span className="ml-1">
