@@ -47,6 +47,7 @@ export default class VoteSpread extends Component {
       datasets: [{
         label: 'מנדטים',
         data: mandatesInSameOrder,
+        fillColor: 'rgb(0, 110, 227)',
       }],
     };
 
