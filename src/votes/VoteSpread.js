@@ -44,12 +44,14 @@ export default class VoteSpread extends Component {
           </div>
           <Bar data={mandatesData} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
-        <div>
+        {this.props.selectedParty && (
           <div>
-            חלוקה לגושים
+            <div>
+              חלוקה לגושים
+            </div>
+            <Pie data={wingsData} options={{ responsive: true, maintainAspectRatio: false }} />
           </div>
-          <Pie data={wingsData} options={{ responsive: true, maintainAspectRatio: false }} />
-        </div>
+        )}
       </div>
     );
   }
