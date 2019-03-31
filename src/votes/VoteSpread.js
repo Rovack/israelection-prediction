@@ -62,6 +62,9 @@ export default class VoteSpread extends Component {
             <h4>
               ראש הממשלה {right > left ? 'בנימין נתניהו' : 'בני גנץ'}
             </h4>
+            <p>
+              עם תמיכה של {Math.round(Math.max(right, left))} ח"כים
+            </p>
             <Image
               roundedCircle
               src="/netanyahu.jpg"
