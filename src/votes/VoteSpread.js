@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Bar, Pie } from 'react-chartjs';
+import { Bar } from 'react-chartjs';
+import Image from 'react-bootstrap/Image';
 
-const formatPartyName = name => {
+function formatPartyName(name) {
   if (name.length <= 15) {
     return name;
   }
@@ -9,6 +10,24 @@ const formatPartyName = name => {
   const firstWordAbbrev = `${firstWord[0]}.`;
   return [firstWordAbbrev, ...nextWords].join(' ');
 };
+
+function getVoteBasedPictureProps(mandates, otherWingMandates) {
+  const baseWidth = 400;
+  const baseHeight = 400;
+
+  const mandatesPercent = mandates / (mandates + otherWingMandates);
+
+  const props = {
+    width: baseWidth * mandatesPercent,
+    height: baseHeight * mandatesPercent,
+  };
+
+  if (mandates < otherWingMandates) {
+    props.style = { opacity: 0.4 };
+  }
+
+  return props;
+}
 
 export default class VoteSpread extends Component {
   render() {
@@ -31,11 +50,6 @@ export default class VoteSpread extends Component {
       }],
     };
 
-    const wingsData = [
-      { value: Math.round(wingSizes.right), label: 'נתניהו' },
-      { value: Math.round(wingSizes.left), label: 'גנץ' },
-    ];
-
     return (
       <div className="m-3">
         <div className="mb-3">
@@ -46,10 +60,14 @@ export default class VoteSpread extends Component {
         </div>
         {this.props.selectedParty && (
           <div>
-            <div>
-              חלוקה לגושים
-            </div>
-            <Pie data={wingsData} options={{ responsive: true, maintainAspectRatio: false }} />
+            <Image
+              roundedCircle
+              src="/netanyahu.jpg"
+              {...getVoteBasedPictureProps(wingSizes.right, wingSizes.left)} />
+            <Image
+              roundedCircle
+              src="/gantz.jpeg"
+              {...getVoteBasedPictureProps(wingSizes.left, wingSizes.right)} />
           </div>
         )}
       </div>
