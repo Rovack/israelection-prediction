@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import VoteSelector from './VoteSelector';
+import PartySelector from './PartySelector';
 import VoteSpread from './VoteSpread';
 import {
   getPartyNames,
@@ -34,7 +34,7 @@ export default class VotesPage extends Component {
   render() {
     return (
       <div>
-        <VoteSelector parties={this.state.partyNames} onPartySelected={this.changeUserVote} />
+        <PartySelector parties={this.state.partyNames} onPartySelected={this.changeUserVote} />
         <VoteSpread
           selectedParty={this.state.selectedParty}
           mandates={this.state.mandates}

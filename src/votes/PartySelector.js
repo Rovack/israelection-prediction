@@ -13,7 +13,7 @@ class PartyItem extends Component {
   }
 }
 
-export default class VoteSelector extends Component {
+export default class PartySelector extends Component {
   state = {
     selectedParty: null,
   };
