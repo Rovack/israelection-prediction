@@ -51,11 +51,15 @@ export default class VoteSpread extends Component {
 
     return (
       <div className="m-3">
-        <div className="mb-3">
+        <div className="mb-1">
           <div>
             חלוקת המנדטים
           </div>
-          <Bar data={mandatesData} options={{ responsive: true, maintainAspectRatio: false }} />
+          <Bar
+            data={mandatesData}
+            options={{ responsive: true, maintainAspectRatio: false }}
+            style={{ minHeight: '200px', maxHeight: '200px' }}
+          />
         </div>
         {this.props.selectedParty && (
           <div>
