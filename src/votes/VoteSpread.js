@@ -28,14 +28,8 @@ function getVoteBasedPictureProps(mandates, otherWingMandates) {
 }
 
 export default class VoteSpread extends Component {
-  render() {
-    const { mandates, wingSizes } = this.props;
-    const { left, right } = wingSizes;
-
-    if (!mandates) {
-      // TODO: Show loading indicator.
-      return null;
-    }
+  renderMandatesChart() {
+    const { mandates } = this.props;
 
     const partyNamesRightToLeft = Object.keys(mandates).reverse();
     const formattedPartyNames = partyNamesRightToLeft.map(formatPartyName);
@@ -52,37 +46,57 @@ export default class VoteSpread extends Component {
     };
 
     return (
-      <div className="m-3">
-        <div className="mb-1">
-          <div>
-            חלוקת המנדטים
-          </div>
-          <Bar
-            data={mandatesData}
-            options={{ responsive: true, maintainAspectRatio: false }}
-            style={{ minHeight: '200px', maxHeight: '200px' }}
-          />
+      <div className="mb-1">
+        <div>
+          חלוקת המנדטים
         </div>
-        {this.props.selectedParty && (
-          <div>
-            <h4>
-              ראש הממשלה {right > left ? 'בנימין נתניהו' : 'בני גנץ'}
-            </h4>
-            <p>
-              עם תמיכה של {Math.round(Math.max(right, left))} ח"כים
-            </p>
-            <Image
-              roundedCircle
-              src="/netanyahu.jpg"
-              className="mx-2"
-              {...getVoteBasedPictureProps(right, left)} />
-            <Image
-              roundedCircle
-              src="/gantz.jpeg"
-              className="mx-2"
-              {...getVoteBasedPictureProps(left, right)} />
-          </div>
-        )}
+        <Bar
+          data={mandatesData}
+          options={{ responsive: true, maintainAspectRatio: false }}
+          style={{ minHeight: '200px', maxHeight: '200px' }}
+        />
+      </div>
+    );
+  }
+
+  renderPms() {
+    const { wingSizes } = this.props;
+    const { left, right } = wingSizes;
+
+    return (
+      <div>
+        <h4>
+          ראש הממשלה {right > left ? 'בנימין נתניהו' : 'בני גנץ'}
+        </h4>
+        <p>
+          עם תמיכה של {Math.round(Math.max(right, left))} ח"כים
+        </p>
+        <Image
+          roundedCircle
+          src="/netanyahu.jpg"
+          className="mx-2"
+          {...getVoteBasedPictureProps(right, left)} />
+        <Image
+          roundedCircle
+          src="/gantz.jpeg"
+          className="mx-2"
+          {...getVoteBasedPictureProps(left, right)} />
+      </div>
+    );
+  }
+
+  render() {
+    const { mandates, selectedParty } = this.props;
+
+    if (!mandates) {
+      // TODO: Show loading indicator.
+      return null;
+    }
+
+    return (
+      <div className="m-3">
+        {this.renderMandatesChart()}
+        {selectedParty && this.renderPms()}
       </div>
     );
   }
