@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import VotesPage from './votes';
+import IntroPage from './intro';
 import DemographicQuestions from './questions';
+import VotesPage from './votes';
 
 class App extends Component {
   state = {
+    hasEntered: false,
     demographicParams: null,
   };
 
@@ -13,14 +15,28 @@ class App extends Component {
     this.setState({ demographicParams: answers });
   };
 
+  onIntroDone = () => {
+    this.setState({ hasEntered: true });
+  }
+
+  renderPage() {
+    const { demographicParams, hasEntered } = this.state;
+
+    if (!hasEntered) {
+      return <IntroPage onDone={this.onIntroDone} />;
+    }
+
+    if (!demographicParams) {
+      return <DemographicQuestions onAnswered={this.onDemographicQuestionsAnswered} />;
+    }
+
+    return <VotesPage demographicParams={demographicParams} />;
+  }
+
   render() {
-    const { demographicParams } = this.state;
     return (
       <div className="App">
-        {demographicParams ?
-          <VotesPage demographicParams={demographicParams} /> :
-          <DemographicQuestions onAnswered={this.onDemographicQuestionsAnswered} />
-        }
+        {this.renderPage()}
       </div>
     );
   }
