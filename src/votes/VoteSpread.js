@@ -12,14 +12,12 @@ function formatPartyName(name) {
 };
 
 function getVoteBasedPictureProps(mandates, otherWingMandates) {
-  const baseWidth = 400;
-  const baseHeight = 400;
-
+  const baseSizePercent = 70;
   const mandatesPercent = mandates / (mandates + otherWingMandates);
 
   const props = {
-    width: baseWidth * mandatesPercent,
-    height: baseHeight * mandatesPercent,
+    width: `${baseSizePercent * mandatesPercent}%`,
+    height: `${baseSizePercent * mandatesPercent}%`,
   };
 
   if (mandates < otherWingMandates) {
@@ -32,6 +30,7 @@ function getVoteBasedPictureProps(mandates, otherWingMandates) {
 export default class VoteSpread extends Component {
   render() {
     const { mandates, wingSizes } = this.props;
+    const { left, right } = wingSizes;
 
     if (!mandates) {
       // TODO: Show loading indicator.
@@ -60,14 +59,19 @@ export default class VoteSpread extends Component {
         </div>
         {this.props.selectedParty && (
           <div>
+            <h4>
+              ראש הממשלה {right > left ? 'בנימין נתניהו' : 'בני גנץ'}
+            </h4>
             <Image
               roundedCircle
               src="/netanyahu.jpg"
-              {...getVoteBasedPictureProps(wingSizes.right, wingSizes.left)} />
+              className="mx-2"
+              {...getVoteBasedPictureProps(right, left)} />
             <Image
               roundedCircle
               src="/gantz.jpeg"
-              {...getVoteBasedPictureProps(wingSizes.left, wingSizes.right)} />
+              className="mx-2"
+              {...getVoteBasedPictureProps(left, right)} />
           </div>
         )}
       </div>
